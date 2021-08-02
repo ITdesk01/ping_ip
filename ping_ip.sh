@@ -24,7 +24,7 @@ else
 	rm -rf $dir_file/result/*
 fi
 clear
-echo "$green开始进行批量ping$white"
+echo -e "$green开始进行批量ping$white"
 	echo "##能够正常ping通的IP如下" >$dir_file/result/ip_ok.txt
 	echo "##这里的IP无法ping通" >$dir_file/result/ip_no.txt
 	for ip in `cat $dir_file/ip.txt | grep -v "##" | awk '{print $1}'`
@@ -47,13 +47,13 @@ echo "$green开始进行批量ping$white"
 	}&
 	done
 	wait
-echo "$green批量ping完成，具体结果查看${yellow}ip_ok.txt${white}和${red}ip_no.txt$white"
+echo -e "$green批量ping完成，具体结果查看${yellow}ip_ok.txt${white}和${red}ip_no.txt$white"
 echo ""
 ip_port
 }
 
 ip_port() {
-echo "$green开始进行批量测试端口连接$white"
+echo -e "$green开始进行批量测试端口连接$white"
 	for ip_port in `cat ip_port.txt | grep "web_port" | sed "s/web_port=\"//g" | sed "s/\"//g"`
 	do
 	{
@@ -99,20 +99,20 @@ echo "$green开始进行批量测试端口连接$white"
 		cat $i | sort -t . -k 4n -o $i
 	done
 	
-echo "$green批量测试端口连接完成，具体结果查看${yellow}ip_port_ok.txt${white}和${red}ip_port_no.txt$white"
+echo -e "$green批量测试端口连接完成，具体结果查看${yellow}ip_port_ok.txt${white}和${red}ip_port_no.txt$white"
 summary
 }
 
 summary() {
 	clear
 	echo "-------------------------------------------------------------------"
-	echo "$green汇总报告：$white"
+	echo -e "$green汇总报告：$white"
 	cat $dir_file/result/ip_ok.txt
 	echo ""
 	cat $dir_file/result/ip_port_ok.txt
 	echo ""
-	echo "$green批量ping完成，具体结果查看${yellow}ip_ok.txt${white}和${red}ip_no.txt$white"
-	echo "$green批量测试端口连接完成，具体结果查看${yellow}ip_port_ok.txt${white}和${red}ip_port_no.txt$white"
+	echo -e "$green批量ping完成，具体结果查看${yellow}ip_ok.txt${white}和${red}ip_no.txt$white"
+	echo -e "$green批量测试端口连接完成，具体结果查看${yellow}ip_port_ok.txt${white}和${red}ip_port_no.txt$white"
 	echo "-------------------------------------------------------------------"	
 	echo ""
 
